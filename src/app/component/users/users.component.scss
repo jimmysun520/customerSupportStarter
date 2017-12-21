@@ -1,0 +1,25 @@
+#user-table {
+    margin:1rem;
+}
+.filter-block {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  align-items: baseline;
+  padding: 8px 24px 0;
+  font-size: 20px;
+  justify-content: space-between;
+}
+.clickable{
+  cursor: pointer;
+}
+
+.filter-container {
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 32px;
+}
+
+/deep/ .mat-tooltip {
+  font-size: 14px;
+}

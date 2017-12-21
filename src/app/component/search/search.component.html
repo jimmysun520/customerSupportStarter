@@ -1,0 +1,72 @@
+<md-card id="user-search" class="mat-elevation-z8">
+  <md-card-title>Search</md-card-title>
+  <section *ngIf="showServiceError()" id="noService">
+    GateKeeper Service is unavailable.
+  </section>
+  <section *ngIf="!showServiceError()">
+    <md-input-container>
+      <input mdInput id="loyaltyId-search" class="" type="text" [(ngModel)]="searchLoyaltyId" placeholder="LoyaltyID" (keyup.enter)="searchByLoyaltyId(searchLoyaltyId)"
+      />
+    </md-input-container>
+    <button md-raised-button id="searchByLoyaltyId" class="clickable search" *ngIf="isOprable()" (click)="searchByLoyaltyId(searchLoyaltyId)"
+      color="primary">
+      <md-icon>search</md-icon>SEARCH</button>
+  </section>
+  <br> OR Contains any of the following:
+  <section>
+    <md-input-container>
+      <input mdInput id="phone-search" class="" type="text" [(ngModel)]="searchFirstname" placeholder="Firstname" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+    <md-input-container>
+      <input mdInput id="phone-search" class="" type="text" [(ngModel)]="searchLastname" placeholder="Lastname" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+  </section>
+  <section>
+    <md-input-container>
+      <input mdInput id="phone-search" class="" type="text" [(ngModel)]="searchPhone" placeholder="Phone (No Dashes)" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+    <md-input-container>
+      <input mdInput id="email-search" class="" type="text" [(ngModel)]="searchEmail" placeholder="Email" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+  </section>
+  <section>
+    <md-input-container>
+      <input mdInput id="city-search" class="" type="text" [(ngModel)]="searchCity" placeholder="City" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+    <md-input-container>
+      <input mdInput id="state-search" class="" type="text" [(ngModel)]="searchState" placeholder="State Abbreviation" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+  </section>
+  <section>
+    <md-input-container>
+      <input mdInput id="zip-search" class="" type="text" [(ngModel)]="searchZip" placeholder="ZipCode" (keyup.enter)="doSearch()"
+      />
+    </md-input-container>
+  </section>
+  <section>
+    <span>Subscribe Email: </span>
+    <md-radio-group [(ngModel)]="searchSubscribeEmail">
+      <md-radio-button *ngFor="let key of subscriptionKeys" [value]="subscriptionType[key]" color="primary">{{key}}</md-radio-button>
+    </md-radio-group>
+  </section>
+  <section>
+    <md-radio-group [(ngModel)]="searchSubscribePhone">
+      <span>Subscribe Phone: </span>
+      <md-radio-button *ngFor="let key of subscriptionKeys" [value]="subscriptionType[key]" color="primary">{{key}}</md-radio-button>
+    </md-radio-group>
+  </section>
+  <button md-raised-button class="clickable search" *ngIf="isOprable()" (click)="doSearch()" color="primary">
+    <md-icon>search</md-icon>SEARCH</button>
+  <section>
+    <button md-raised-button class="clickable" (click)="clear()">CLEAR</button>
+  </section>
+  <!-- <section>
+    <button md-raised-button class="clickable" *ngIf="isOprable()" (click)="goToUsers()" color="warn">JUST SHOW ME SOME CUSTOMERS (SLOW)</button>
+  </section> -->
+</md-card>

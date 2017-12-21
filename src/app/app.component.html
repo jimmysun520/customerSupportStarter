@@ -1,0 +1,9 @@
+<md-toolbar id="app-nav" color="primary">
+  <span id="app-title" class="clickable" (click)="navigateToSearch()">Digital Coupon Account Management Portal</span>
+  <span class="nav-spacer"></span>
+  <span *ngIf="adal.userInfo.isAuthenticated" (click)="logout()" class="clickable">
+      LOGOUT
+    </span>
+</md-toolbar>
+
+<router-outlet></router-outlet>

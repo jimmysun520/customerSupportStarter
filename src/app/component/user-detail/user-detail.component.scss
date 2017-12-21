@@ -1,0 +1,20 @@
+#user-detail {
+    margin:1rem;
+    max-width: 700px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+section {
+  margin: 1rem;
+}
+
+.errors{
+  color: crimson;
+}
+
+.valid{
+  color: green;
+}
+/deep/ .mat-tooltip {
+  font-size: 14px;
+}

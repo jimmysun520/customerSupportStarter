@@ -1,0 +1,68 @@
+<md-card id="user-table" class="mat-elevation-z8">
+  <h1>User Search Result</h1>
+  <md-progress-bar #userDetailLoader *ngIf="!usersExist()" mode="indeterminate"></md-progress-bar>
+  <div class="flex filter-block" layout="row">
+    <md-input-container class="md-block filter-container" floatPlaceholder="never">
+      <input mdInput #filter placeholder="Find User in Search Result">
+    </md-input-container>
+  </div>
+  <!-- <div layout="row">
+  <md-input-container flex="33" class="flex">
+    <label for="loyaltyId-search">LoyaltyID</label>
+    <input mdInput id="loyaltyId-search" class="" type="text"  />
+  </md-input-container>
+  <md-input-container  flex="33" class="flex">
+    <label for="userName-search">UserName</label>
+    <input mdInput id="userName-search" class="" type="text" />
+  </md-input-container >
+  <md-input-container  flex class="flex">
+    <label for="firstName-search">FirstName</label>
+    <input mdInput id="userName-search" class="" type="text"  />
+  </md-input-container>
+</div> -->
+  <md-table #table [dataSource]="dataSource">
+    <ng-container cdkColumnDef="actions">
+      <md-header-cell *cdkHeaderCellDef> Actions </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        <md-icon class="clickable" mdTooltip="EDIT" color="primary" (click)="edit(row)">mode_edit</md-icon>
+      </md-cell>
+    </ng-container>
+    <div layout-align='start center' layout='column'>
+      <ng-container cdkColumnDef="loyaltyId">
+        <md-header-cell *cdkHeaderCellDef> LoyaltyID </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.loyaltyId}} </md-cell>
+      </ng-container>
+    </div>
+    <ng-container cdkColumnDef="name">
+      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.firstName | initCaps}} {{row.lastName | initCaps}}</md-cell>
+    </ng-container>
+    <ng-container cdkColumnDef="phoneNumber">
+      <md-header-cell *cdkHeaderCellDef> Phone </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.phoneNumber | readablePhone}} </md-cell>
+    </ng-container>
+    <ng-container cdkColumnDef="email">
+      <md-header-cell *cdkHeaderCellDef> Email </md-header-cell>
+      <md-cell *cdkCellDef="let row" mdTooltip="{{row.email}}">{{ (row.email && row.email.length>12)? (row.email | slice:0:10)+'..':(row.email) }}</md-cell>
+    </ng-container>
+    <ng-container cdkColumnDef="city">
+      <md-header-cell *cdkHeaderCellDef> City </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.city | initCaps}} </md-cell>
+    </ng-container>
+    <ng-container cdkColumnDef="state">
+      <md-header-cell *cdkHeaderCellDef> State </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.state | uppercase}} </md-cell>
+    </ng-container>
+    <ng-container cdkColumnDef="zipCode">
+      <md-header-cell *cdkHeaderCellDef> Zip Code </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.zipCode | shortZip}} </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
+  <md-paginator #paginator [length]="dataSource.filteredDataSize" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+  </md-paginator>
+
+    <button md-raised-button color="primary" (click)="goToSearch()">DO ANOTHER SEARCH</button>
+</md-card>

@@ -1,0 +1,85 @@
+<md-card id="user-detail">
+  <md-progress-bar #userDetailLoader *ngIf="token === undefined" mode="indeterminate"></md-progress-bar>
+  <section *ngIf="token !== undefined">
+    <md-card-header>
+      <section mdTooltip="{{tooltips.getInmarTokenError}}">
+        <label>Inmar account:
+          <md-icon *ngIf="!existOnInmar" class="errors">error</md-icon>
+          <span *ngIf="token !== undefined && !existOnInmar" class="errors">This User does not exist in Inmar Portal. This might due to user registration error like wrong format of phone number or State Code. Please use other tools to confirm your investigation, such as Inmar Portal. If so, record the information and request IT developtment Team for investigation. Request might take up to one week.</span>
+
+          <md-icon *ngIf="existOnInmar" class="valid">check_circle</md-icon>
+          <span *ngIf="existOnInmar" class="valid">This User is a valid Inmar Digital Coupon User.</span>
+        </label>
+      </section>
+    </md-card-header>
+    <md-card-content *ngIf="userData" flex>
+      <section>
+        <md-input-container flex="33" class="" mdTooltip="{{tooltips.notEditable}}" mdTooltipPosition="after">
+          <label for="loyaltyId-search">LoyaltyID</label>
+          <input mdInput id="loyaltyId-search" class="" type="text" [(ngModel)]="userData.loyaltyId" disabled="disabled" />
+        </md-input-container>
+        <md-input-container flex="33" class="" mdTooltip="{{tooltips.notEditable}}" mdTooltipPosition="before">
+          <label for="userName-search">UserName</label>
+          <input mdInput id="userName-search" class="" type="text" [(ngModel)]="userData.userName" disabled="disabled" />
+        </md-input-container>
+      </section>
+      <section>
+        <md-input-container flex="33" class="">
+          <label for="firstName-search">FirstName</label>
+          <input mdInput id="userName-search" class="" type="text" [(ngModel)]="userData.firstName" />
+        </md-input-container>
+        <md-input-container class="">
+          <label for="lastName-search">LastName</label>
+          <input mdInput id="userName-search" class="" type="text" [(ngModel)]="userData.lastName" />
+        </md-input-container>
+      </section>
+      <section>
+        <md-input-container class="">
+          <label for="phone-search">Phone</label>
+          <input mdInput id="phone-search" class="" type="tel" [(ngModel)]="userData.phoneNumber" />
+        </md-input-container>
+        <md-input-container class="">
+          <label for="email-search">Email</label>
+          <input mdInput id="email-search" class="" type="email" [(ngModel)]="userData.email" />
+        </md-input-container>
+      </section>
+      <section>
+        <md-input-container class="">
+          <label for="address1-search">Address1</label>
+          <input mdInput id="address1-search" class="" type="text" [(ngModel)]="userData.address1" />
+        </md-input-container>
+        <md-input-container class="">
+          <label for="address2-search">Address2</label>
+          <input mdInput id="address2-search" class="" type="text" [(ngModel)]="userData.address2" />
+        </md-input-container>
+        <br>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="city-search">City</label>
+          <input mdInput id="city-search" class="" type="text" [(ngModel)]="userData.city" />
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="state-search">State (Abbreviations)</label>
+          <input mdInput id="state-search" class="" type="text" [(ngModel)]="userData.state" />
+        </md-input-container>
+        <br>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label for="zipCode-search">ZIP</label>
+          <input mdInput id="zipCode-search" class="" type="text" [(ngModel)]="userData.zipCode" />
+        </md-input-container>
+        <!-- </section>
+        <section> -->
+        <button md-raised-button id="resetPass" [disabled]="!existOnInmar" (click)="resetPassword()">RESET PASSWORD AS "{{defaultResetPassword}}"</button>
+      </section>
+      <section>
+        <md-slide-toggle [(ngModel)]="userData.subscribeEmail" labelPosition="before" color="primary">Subscribe Email</md-slide-toggle>
+        <md-slide-toggle [(ngModel)]="userData.subscribePhone" labelPosition="before" color="primary">Subscribe Phone</md-slide-toggle>
+      </section>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <br>
+      <br>
+      <button md-raised-button color="primary" (click)="save()" [disabled]="!existOnInmar">SAVE</button>
+      <button md-raised-button (click)="cancel()">BACK</button>
+    </md-card-actions>
+  </section>
+</md-card>
